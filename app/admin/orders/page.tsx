@@ -76,7 +76,7 @@ export default function AdminOrdersPage() {
         // Update local state
         setOrders(prevOrders =>
           prevOrders.map(order =>
-            order.id === orderId ? { ...order, status: newStatus, updatedAt: new Date().toISOString() } : order
+            order.id === orderId ? { ...order, status: newStatus, updatedAt: new Date() } : order
           )
         );
       }
