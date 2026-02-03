@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Mock admin credentials (in real app, use database)
 const ADMIN_CREDENTIALS = {
   username: 'admin',
-  password: 'password123'
+  password: 'admin123'
 };
 
 export async function POST(request: NextRequest) {

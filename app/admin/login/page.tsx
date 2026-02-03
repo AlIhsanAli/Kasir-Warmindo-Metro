@@ -30,11 +30,11 @@ export default function AdminLoginPage() {
 
       if (response.ok) {
         const data = await response.json();
-        login(data.user, data.token);
+        login(username, password);
         router.push('/admin/dashboard');
       } else {
         const errorData = await response.json();
-        setError(errorData.message || 'Login gagal');
+        setError(errorData.error || 'Login gagal');
       }
     } catch (error) {
       setError('Terjadi kesalahan. Silakan coba lagi.');
