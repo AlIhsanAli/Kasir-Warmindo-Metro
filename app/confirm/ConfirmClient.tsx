@@ -19,13 +19,15 @@ function ConfirmPageContent() {
   const { items, getTotal, clearCart } = useCartStore();
 
   const total = getTotal();
-  const defaultTableNumber = searchParams?.get('table') || '1';
 
   useEffect(() => {
-    if (searchParams) {
-      setTableNumber(defaultTableNumber);
-    }
-  }, [defaultTableNumber, searchParams]);
+    // Get customer data from URL parameters
+    const nameParam = searchParams?.get('name');
+    const tableParam = searchParams?.get('table');
+
+    if (nameParam) setCustomerName(nameParam);
+    if (tableParam) setTableNumber(tableParam);
+  }, [searchParams]);
 
   const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();

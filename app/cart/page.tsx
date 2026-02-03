@@ -2,13 +2,18 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Plus, Minus, Trash2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ArrowLeft, Plus, Minus, Trash2, User, MapPin } from 'lucide-react';
 import { useCartStore } from '@/lib/stores/cart';
 import Link from 'next/link';
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, getTotal, clearCart } = useCartStore();
   const total = getTotal();
+
+  const [customerName, setCustomerName] = useState('');
+  const [tableNumber, setTableNumber] = useState('');
+  const [errors, setErrors] = useState<{customerName?: string, tableNumber?: string}>({});
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
     if (newQuantity <= 0) {

@@ -75,7 +75,7 @@ function MenuPageContent() {
             Selamat Datang di Warmindo Metro
           </h1>
           <p className="text-lg text-gray-600">
-            Meja {tableNumber} • Pilih menu favorit Anda
+            Pilih menu favorit Anda
           </p>
         </motion.div>
 

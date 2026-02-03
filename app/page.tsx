@@ -9,8 +9,6 @@ import { MenuItem } from '@/lib/types';
 import { menuItems } from '@/lib/data';
 
 export default function Home() {
-  const [customerName, setCustomerName] = useState('');
-  const [tableNumber, setTableNumber] = useState('');
   const [featuredItems, setFeaturedItems] = useState<MenuItem[]>([]);
   const router = useRouter();
 
@@ -19,11 +17,8 @@ export default function Home() {
     setFeaturedItems(menuItems.slice(0, 6)); // Show first 6 items
   }, []);
 
-  const handleStartOrder = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (customerName.trim() && tableNumber.trim()) {
-      router.push(`/menu?table=${tableNumber}&name=${encodeURIComponent(customerName)}`);
-    }
+  const handleStartOrder = () => {
+    router.push('/menu?table=1');
   };
 
   return (
@@ -68,53 +63,21 @@ export default function Home() {
               Nikmati pengalaman makan yang modern dan efisien.
             </motion.p>
 
-            {/* Customer Form */}
-            <motion.form
+            {/* Start Order Button */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              onSubmit={handleStartOrder}
-              className="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-8 mb-12"
+              className="max-w-md mx-auto mb-12"
             >
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-2">
-                    Nama Anda
-                  </label>
-                  <input
-                    type="text"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="Masukkan nama lengkap"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-2">
-                    Nomor Meja
-                  </label>
-                  <input
-                    type="number"
-                    value={tableNumber}
-                    onChange={(e) => setTableNumber(e.target.value)}
-                    placeholder="Contoh: 5"
-                    min="1"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-white py-4 rounded-lg hover:bg-secondary transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                >
-                  Mulai Memesan
-                  <ArrowRight className="inline-block ml-2 w-5 h-5" />
-                </button>
-              </div>
-            </motion.form>
+              <Link
+                href="/menu"
+                className="w-full bg-primary text-white py-4 rounded-lg hover:bg-secondary transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-block text-center"
+              >
+                Pesan Sekarang
+                <ArrowRight className="inline-block ml-2 w-5 h-5" />
+              </Link>
+            </motion.div>
 
             {/* QR Code Info */}
             <motion.div
@@ -243,48 +206,38 @@ export default function Home() {
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <button
-              onClick={() => router.push('/menu')}
-              className="bg-primary text-white px-8 py-4 rounded-lg hover:bg-secondary transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-flex items-center gap-2"
-            >
-              Lihat Semua Menu
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </motion.div>
+
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-foreground text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <ChefHat className="w-8 h-8 text-primary" />
-              <span className="text-2xl font-bold">Warmindo Metro</span>
-            </div>
+      {/* Header with Admin Button */}
+      <header className="absolute top-0 left-0 right-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-end">
             <Link
               href="/admin/login"
-              className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors flex items-center gap-2"
+              className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2"
             >
               <Users size={16} />
               Masuk sebagai Admin
             </Link>
           </div>
-          <div className="text-center mt-8">
-            <p className="text-gray-300 mb-4">
-              Sistem pemesanan modern untuk pengalaman makan yang lebih baik.
-            </p>
-            <p className="text-sm text-gray-400">
-              © 2024 Warmindo Metro. Dibuat dengan ❤️ untuk pelanggan terbaik.
-            </p>
+        </div>
+      </header>
+
+      {/* Footer */}
+      <footer className="bg-foreground text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <ChefHat className="w-8 h-8 text-primary" />
+            <span className="text-2xl font-bold">Warmindo Metro</span>
           </div>
+          <p className="text-gray-300 mb-4">
+            Sistem pemesanan modern untuk pengalaman makan yang lebih baik.
+          </p>
+          <p className="text-sm text-gray-400">
+            © 2024 Warmindo Metro. Dibuat dengan ❤️ untuk pelanggan terbaik.
+          </p>
         </div>
       </footer>
     </div>
