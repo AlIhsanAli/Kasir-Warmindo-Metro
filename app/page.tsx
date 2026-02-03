@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { ChefHat, Users, Clock, Star, ArrowRight, QrCode } from 'lucide-react';
+import Link from 'next/link';
 import { MenuItem } from '@/lib/types';
 import { menuItems } from '@/lib/data';
 
@@ -262,19 +263,28 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-foreground text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex justify-center mb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
               <ChefHat className="w-8 h-8 text-primary" />
               <span className="text-2xl font-bold">Warmindo Metro</span>
             </div>
+            <Link
+              href="/admin/login"
+              className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors flex items-center gap-2"
+            >
+              <Users size={16} />
+              Masuk sebagai Admin
+            </Link>
           </div>
-          <p className="text-gray-300 mb-4">
-            Sistem pemesanan modern untuk pengalaman makan yang lebih baik.
-          </p>
-          <p className="text-sm text-gray-400">
-            © 2024 Warmindo Metro. Dibuat dengan ❤️ untuk pelanggan terbaik.
-          </p>
+          <div className="text-center mt-8">
+            <p className="text-gray-300 mb-4">
+              Sistem pemesanan modern untuk pengalaman makan yang lebih baik.
+            </p>
+            <p className="text-sm text-gray-400">
+              © 2024 Warmindo Metro. Dibuat dengan ❤️ untuk pelanggan terbaik.
+            </p>
+          </div>
         </div>
       </footer>
     </div>

@@ -126,23 +126,8 @@ function MenuPageContent() {
         )}
       </main>
 
-      {/* Cart Sidebar (placeholder for now) */}
-      {showCart && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={() => setShowCart(false)}>
-          <div className="absolute right-0 top-0 h-full w-80 bg-white shadow-lg" onClick={(e) => e.stopPropagation()}>
-            <div className="p-4">
-              <h2 className="text-xl font-bold mb-4">Keranjang</h2>
-              <p>Keranjang kosong</p>
-              <button
-                onClick={() => setShowCart(false)}
-                className="mt-4 bg-primary text-white px-4 py-2 rounded-lg"
-              >
-                Tutup
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Cart Sidebar */}
+      <Cart isOpen={showCart} onClose={() => setShowCart(false)} />
     </div>
   );
 }
